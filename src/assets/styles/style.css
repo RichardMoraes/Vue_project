@@ -1,36 +1,3 @@
-<template>
-<div class="wrapper">
-  <div class="input-group">
-    <input class="search" type="text" placeholder="Searching for something?"/><span class="bar"></span>
-  </div>
-  <div class="disclaimer"><a href="https://lhenrique.com.br/" target="_blank">💙</a></div>
-</div>
-</template>
-
-<script>
-import Buscar from './services/search'
-
-export default {
-
-data(){
-  return {
-    musica: []
-  }
-},
-
-mounted(){
-  Buscar.search().then(retorno =>{
-    console.log(retorno.data.response.hits)
-  })
-}
-}
-
-</script>
-
-<style>
-body {
-  margin: 0px;
-}
 .wrapper {
   background: linear-gradient(45deg, #26547c 0%, #06d6a0 100%);
   height: 100vh;
@@ -107,4 +74,3 @@ body {
   right: 0;
   top: 5px;
 }
-</style>
