@@ -6,7 +6,7 @@ var headers = {
 }
 
 var params = {
-  q: 'A little piece of heaven'
+  q: 'Bon Jovi'
 }
 
 export default {

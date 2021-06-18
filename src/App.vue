@@ -1,9 +1,16 @@
 <template>
 <div class="wrapper">
   <div class="input-group">
-    <input class="search" type="text" placeholder="Searching for something?"/><span class="bar"></span>
+    <!--<input class="search" type="text" placeholder="Searching for something?"/><span class="bar"></span>-->
+    <tr v-for="musica of musicas" :key="musica.result.id">
+
+      <td>Musica: {{musica.result.full_title}}</td>
+      <td>Artista: {{musica.result.primary_artist.name}}</td>
+      <td><img :src="musica.result.header_image_url" style="margin-left: 30px; width: 50px;height: 50px;" alt="Album"></td>
+      <br>
+    </tr>
   </div>
-  <div class="disclaimer"><a href="https://lhenrique.com.br/" target="_blank">💙</a></div>
+  <!--<div class="disclaimer"><a href="https://lhenrique.com.br/" target="_blank">💙</a></div>-->
 </div>
 </template>
 
@@ -14,13 +21,14 @@ export default {
 
 data(){
   return {
-    musica: []
+    musicas: []
   }
 },
 
 mounted(){
   Buscar.search().then(retorno =>{
     console.log(retorno.data.response.hits)
+    this.musicas = retorno.data.response.hits
   })
 }
 }
