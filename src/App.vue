@@ -1,17 +1,23 @@
 <template>
 <div class="wrapper">
   <div class="input-group">
-    <!--<input class="search" type="text" placeholder="Searching for something?"/><span class="bar"></span>-->
-    <tr v-for="musica of musicas" :key="musica.result.id">
-
-      <td>Musica: {{musica.result.full_title}}</td>
-      <td>Artista: {{musica.result.primary_artist.name}}</td>
-      <td><img :src="musica.result.header_image_url" style="margin-left: 30px; width: 50px;height: 50px;" alt="Album"></td>
+    <form @submit.prevent="search">
+    <div name="icon-box">
+    <input class="search" type="text" placeholder="Insira o nome da Música aqui" v-model="musica.name"><span class="bar"></span>
+    </div>
+    <br>
+      <ul class="list-group" v-for="musica of musicas" :key="musica.result.id">
+        <li class="list-group-item">Musica: {{musica.result.full_title}}</li>
+        <li class="list-group-item">Artista: {{musica.result.primary_artist.name}}</li>
+        <li class="list-group-item"><img :src="musica.result.header_image_url" style="margin-left: 30px; width: 50px;height: 50px;" alt="Album"></li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
       <br>
-    </tr>
+    </form>
   </div>
-  <!--<div class="disclaimer"><a href="https://lhenrique.com.br/" target="_blank">💙</a></div>-->
-</div>
+  <div class="disclaimer"><a href="https://lhenrique.com.br/" target="_blank">💙</a></div>
+  </div>
 </template>
 
 <script>
@@ -21,15 +27,23 @@ export default {
 
 data(){
   return {
+    musica: {
+      name: ''
+    },
     musicas: []
   }
 },
 
-mounted(){
-  Buscar.search().then(retorno =>{
-    console.log(retorno.data.response.hits)
-    this.musicas = retorno.data.response.hits
-  })
+methods:{
+
+search(){
+var params = {
+  q: this.musica
+}
+Buscar.search(params).then(retorno =>{
+  this.musicas = retorno.data.response.hits
+})
+}
 }
 }
 

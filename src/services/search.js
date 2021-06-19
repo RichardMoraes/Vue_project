@@ -5,12 +5,8 @@ var headers = {
   'x-rapidapi-host': 'genius.p.rapidapi.com'
 }
 
-var params = {
-  q: 'Bon Jovi'
-}
-
 export default {
-    search:() => {
-        return http.get('https://genius.p.rapidapi.com/search', {params, headers})
+    search:(params) => {
+        return http.get('/search', {params, headers})
     }
 }
